@@ -1,6 +1,18 @@
 import pygame
 import sys
-  
+import time
+import random
+
+
+
+with open('words.txt', 'r',  encoding="utf-8") as g:
+    lines = g.readlines()
+
+
+b = random.randint(0, len(lines)-1)
+a = lines[b]
+
+print(a)
 
 black = (0,0,0)
 white = (255, 255, 255)
@@ -16,7 +28,7 @@ pygame.init()
 clock = pygame.time.Clock()
   
 # it will display on screen
-screen = pygame.display.set_mode([425, 700])
+screen = pygame.display.set_mode([600, 700])
   
 # basic font for user typed
 base_font = pygame.font.Font("SourceCodePro-ExtraBold.ttf", 72)
@@ -27,18 +39,17 @@ input_rect = pygame.Rect(100, 95, 225, 72)
   
 # color_active stores color(lightskyblue3) which
 # gets active when input box is clicked by user
-color_active = white
+#color_active = white
   
 # color_passive store color(chartreuse4) which is
 # color of input box.
-color_passive = gray1
-color = color_passive
+#color_passive = gray1
+#color = color_passive
   
 active = False
   
 while True:
     for event in pygame.event.get():
-        text = base_font.render('iiiiiiii', True, green, black)     
       # if user types QUIT then the screen will close
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -56,31 +67,31 @@ while True:
             if event.key == pygame.K_BACKSPACE:
   
                 # get text input from 0 to -1 i.e. end.
-                user_text = user_text[:-1]
+                user_text = user_text[:-2]
   
             # Unicode standard is used for string
             # formation
             else:
-                if len(user_text)<=4:
+                if len(user_text)<=9:
                     if event.unicode != "'":
-                        user_text += event.unicode
+                        user_text += event.unicode + " " 
                 
       
     # it will set background color of screen
     screen.fill(gray)
   
-    if active:
+    """if active:
         color = color_active
     else:
-        color = color_passive
+        color = color_passive"""
           
     # draw rectangle and argument passed which should
     # be on screen
-    pygame.draw.rect(screen, color, (100, 105, 225, 90))
-    pygame.draw.rect(screen, color, (100, 205, 225, 90))
-    pygame.draw.rect(screen, color, (100, 305, 225, 90))
-    pygame.draw.rect(screen, color, (100, 405, 225, 90))
-    pygame.draw.rect(screen, color, (100, 505, 225, 90))
+    pygame.draw.rect(screen, gray1, (100, 105, 405, 90))
+    pygame.draw.rect(screen, gray1, (100, 205, 405 , 90))
+    pygame.draw.rect(screen, gray1, (100, 305, 405, 90))
+    pygame.draw.rect(screen, gray1, (100, 405, 405, 90))
+    pygame.draw.rect(screen, gray1, (100, 505, 405, 90))
     #pygame.draw.rect(screen, color, (100, 610, 225, 72))
   
     text_surface = base_font.render(user_text, True, black)
@@ -93,6 +104,15 @@ while True:
     if event.type == pygame.KEYDOWN:
         if event.key == pygame.K_RETURN:  
            print(user_text)
+           time.sleep(1)
+           for i in range (5):
+            if user_text.find(a[i]) == -1: 
+               print("nav")
+
+
+    
+
+
 
       
   
