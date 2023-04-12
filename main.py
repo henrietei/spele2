@@ -9,7 +9,10 @@ gray = (230, 230, 230)
 gray1 = (220, 220, 220)
 yellow = (255, 255, 0)
 green = (0, 255, 0)  
- 
+
+chr_sar=["!", "@", "#", "$", "%", ",", " ", ",", ".", "*"]
+
+input_y=95
 
 def draw_rect(x,y):
     pygame.draw.rect(screen, green, pygame.Rect(x, y, 60, 60))
@@ -29,55 +32,68 @@ a = lines[b]
 
 print(a)
 
-
 pygame.init()
   
-
-
 clock = pygame.time.Clock()
 screen = pygame.display.set_mode([600, 800])
 base_font = pygame.font.Font("SourceCodePro-ExtraBold.ttf", 72)
 user_text = ''
+user_text2=""
 
-  
+#txtsurf = base_font.render("Hello, World", True, black)
 
+#surface1()
 
-
+screen.fill(gray)
 surface1()
+
+
+
+
 while True:
-    for event in pygame.event.get():
-      # if user types QUIT then the screen will close
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-  
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:
-                user_text = user_text[:-2]
-                #print("kgghh")
+        input_rect = pygame.Rect(100, 95, 225, 72)    
+        for event in pygame.event.get():
+        # if user types QUIT then the screen will close
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+    
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_text = user_text[:-2]
+                    #print("kgghh")
                 
-                
-                
+                elif event.key == pygame.K_RETURN:
+                    user_text1=user_text.replace(" ", "")
+                    print(user_text1)
+                    
+                    #break
 
-            else:
-                if len(user_text)<=9:
-                    if event.unicode != "'":
-                        user_text += event.unicode + " " 
+                    
 
-        if event.type==pygame.KEYDOWN and event.key == pygame.K_RETURN:
-            user_text1=user_text.replace(" ", "")
-            print(user_text1)
-                
+                else:
+                    if len(user_text)<=9:
+                        if event.unicode not in chr_sar:
+                            user_text += event.unicode + " " 
 
-                
-      
-    screen.fill(gray)
-    surface1()
-    input_rect = pygame.Rect(100, 95, 225, 72)
-    text_surface = base_font.render(user_text, True, black)
-    screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
-    pygame.display.flip()
-    clock.tick(60)
+
+                    
+
+                    
+        txtsurf = base_font.render(user_text, True, black)
+        screen.blit(txtsurf,(105, 100))
+        pygame.display.flip()
+        
+
+        
+        #pygame.display.update()
+        #text_surface = base_font.render(user_text, True, black)
+        #screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+
+
+        
+        clock.tick(60)
+    
 
 
     
