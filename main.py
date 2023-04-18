@@ -49,56 +49,54 @@ minejums="0"
 
 input_rect = pygame.Rect(100, 95, 225, 72) 
 
-for guess in range(5):
-    print(guess)
-    while minejums=="0":
-        surface1()
-        #input_rect = pygame.Rect(100, 95, 225, 72)    
-        for event in pygame.event.get():
-        # if user types QUIT then the screen will close
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
 
-            if event.type == pygame.KEYDOWN: 
-                if event.key == pygame.K_RETURN:
-                    if len(user_text)==10:
-                        minejums=user_text.replace(" ", "")
-                        print(minejums)
-                        pygame.draw.rect(screen, gray, (0, 0, 600, 100))
-                        guesses.append(minejums)
-                        minejums="0"
-                        
-                        
-                    else: 
-                        warning = w_font.render("Nepietiekami daudz burtu", True, black)
-                        screen.blit(warning,(100, 60))
-                        #time.sleep(2)
-                        
+#print(guess)
 
+surface1()
 
-                if event.key == pygame.K_BACKSPACE:
-                    user_text = user_text[:-2]
+#input_rect = pygame.Rect(100, 95, 225, 72)
+while True:    
+    for event in pygame.event.get():
+    # if user types QUIT then the screen will close
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.KEYDOWN: 
+            if event.key == pygame.K_RETURN:
+                if len(user_text)==10:
+                    minejums=user_text.replace(" ", "")
+                    print(minejums)
+                    pygame.draw.rect(screen, gray, (0, 0, 600, 100))
+                    guesses.append(minejums)
                     
-                else:
-                    if len(user_text)<=9:
-                        if ord(event.unicode)>65:
-                            user_text += event.unicode + " " 
+                else: 
+                    warning = w_font.render("Nepietiekami daudz burtu", True, black)
+                    screen.blit(warning,(100, 60))
+                    #time.sleep(2)
+                    
+            if event.key == pygame.K_BACKSPACE:
+                user_text = user_text[:-2]
+                
+            else:
+                if len(user_text)<=9:
+                    if ord(event.unicode)>65:
+                        user_text += event.unicode + " " 
 
-        txtsurf = base_font.render(user_text, True, black)
-        screen.blit(txtsurf,(105, 100))
-        pygame.display.flip()
-
-        
-
-        
-        #pygame.display.update()
-        #text_surface = base_font.render(user_text, True, black)
-        #screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+    txtsurf = base_font.render(user_text, True, black)
+    screen.blit(txtsurf,(105, 100))
+    pygame.display.flip()
 
 
-        
-        clock.tick(60)
+
+
+    #pygame.display.update()
+    #text_surface = base_font.render(user_text, True, black)
+    #screen.blit(text_surface, (input_rect.x+5, input_rect.y+5))
+
+
+
+    clock.tick(60)
 
     
 
